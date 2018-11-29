@@ -11,6 +11,12 @@ export function createBackgroundLayer(backgrounds, sprites) {
   };
 }
 
+export function createSpriteLayer(entity){
+  return function drawSpriteLayer(context) {
+    entity.draw(context);
+  }
+}
+
 function drawBackground(background, context, sprites) {
   background.ranges.forEach(([x1, x2, y1, y2]) => {
     for (let x = x1; x < x2; ++x){
