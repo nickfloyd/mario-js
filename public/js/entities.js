@@ -1,19 +1,19 @@
 import { Entity } from './entity.js';
 import { loadMarioSprite } from './sprites.js';
+import { Velocity } from './traits/velocity.js';
+import { Jump } from './traits/jump.js';
 
 export function createMario() {
   return loadMarioSprite()
   .then(sprite => {
     const mario = new Entity();
-    mario.pos.set(64, 180);
-    mario.vel.set(2, -10);
+
+    mario.addTrait(new Velocity());
+    mario.addTrait(new Jump());
     mario.draw = function drawMario(context) {
       sprite.draw('idle', context, this.pos.x, this.pos.y);
     };
-    mario.update = function updateMario() {
-      this.pos.x += this.vel.x;
-      this.pos.y += this.vel.y;
-    };
+
     return mario;
   });
 }
